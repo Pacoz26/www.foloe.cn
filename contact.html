@@ -149,7 +149,7 @@
             var POI = new T.LngLat(121.266756, 31.195653);
 
             var map = new T.Map(el);
-            map.centerAndZoom(POI, 16);
+            map.centerAndZoom(POI, 15);
 
             var marker = new T.Marker(POI);
             map.addOverLay(marker);
@@ -160,6 +160,20 @@
             marker.addEventListener('click', function () {
                 map.openInfoWindow(infoWin, marker.getLngLat());
             });
+
+            // 补充重要建筑物名称标注（天地图注记未覆盖的 POI）
+            function addLabel(name, lng, lat, offsetY) {
+                var label = new T.Label();
+                label.setContent(name);
+                label.setLngLat(new T.LngLat(lng, lat));
+                label.setOffset(new T.Point(0, offsetY || -18));
+                label.setFontSize(12);
+                label.setFontColor('#e67e22');
+                label.setBackgroundColor('rgba(255,255,255,0.9)');
+                map.addOverLay(label);
+            }
+            addLabel('复襄公社', 121.266756, 31.195653, -30);
+            addLabel('蟠龙天地', 121.2715607, 31.1909990);
         })();
     </script>
 </body>
